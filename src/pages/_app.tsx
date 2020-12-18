@@ -1,12 +1,10 @@
 import React from "react";
 import App, { AppInitialProps, AppContext } from "next/app";
-import { wrapper } from "../components/store";
+import { wrapper } from "../store";
 import '../styles/index.css';
 
 class WrappedApp extends App<AppInitialProps> {
   public static getInitialProps = async ({ Component, ctx }: AppContext) => {
-    ctx.store.dispatch({ type: "APP", payload: "was set in _app" });
-
     return {
       pageProps: {
         // Call page-level getInitialProps

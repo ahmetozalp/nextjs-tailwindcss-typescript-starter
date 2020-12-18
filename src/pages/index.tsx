@@ -10,34 +10,7 @@ export interface PageProps extends State {
 }
 
 class Index extends React.Component<PageProps> {
-  public static async getInitialProps({
-    store,
-    pathname,
-    query,
-    req
-  }: NextPageContext<State>) {
-    console.log("2. Page.getInitialProps uses the store to dispatch things", {
-      pathname,
-      query
-    });
-
-    if (req) {
-      // All async actions must be await'ed
-      await store.dispatch({ type: "PAGE", payload: "server" });
-
-      // Some custom thing for this particular page
-      return { pageProp: "server" };
-    }
-
-    // await is not needed if action is synchronous
-    store.dispatch({ type: "PAGE", payload: "client" });
-
-    // Some custom thing for this particular page
-    return { pageProp: "client" };
-  }
-
   public render() {
-    // console.log('5. Page.render');
     const { pageProp, appProp, app, page } = this.props;
     return (
       <div className="index">
@@ -49,7 +22,8 @@ class Index extends React.Component<PageProps> {
           </main>
         </div>
 
-        <pre>{JSON.stringify({ pageProp, appProp, app, page }, null, 2)}</pre>
+       {/*
+       <pre>{JSON.stringify({ pageProp, appProp, app, page }, null, 2)}</pre>
 
         <Link href="/server">
           <a>Navigate</a>
@@ -62,6 +36,7 @@ class Index extends React.Component<PageProps> {
         <Link href="/error">
           <a>Navigate to error</a>
         </Link>
+       */}
       </div>
     );
   }

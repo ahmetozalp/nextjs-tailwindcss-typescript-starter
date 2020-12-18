@@ -2,14 +2,18 @@ import { AnyAction } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
 
 export interface State {
-  app: string;
-  page: string;
+  app: string
+  page: string
+  loading: boolean
 }
 
-export const reducer = (
-  state: State = { app: "init", page: "init" },
-  action: AnyAction
-) => {
+const INITIAL_STATE = {
+  app: '',
+  page: '',
+  loading: false,
+};
+
+export const ui = (state: State = INITIAL_STATE, action: AnyAction) => {
   switch (action.type) {
     case HYDRATE:
       if (action.payload.app === "init") delete action.payload.app;
@@ -19,6 +23,11 @@ export const reducer = (
       return { ...state, app: action.payload };
     case "PAGE":
       return { ...state, page: action.payload };
+    case 'FORM_SUCCESS':
+      return {
+        ...state,
+        loading: !state.loading,
+      };
     default:
       return state;
   }
